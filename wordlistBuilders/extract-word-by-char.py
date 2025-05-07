@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 extract_romanian_with_diacritics.py
 ───────────────────────────────────

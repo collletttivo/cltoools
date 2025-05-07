@@ -1,8 +1,6 @@
-#!/usr/bin/env python3
 """
 extract_by_font.py – pull every word rendered in a given font (or font-regex)
-*and* whose fill colour is black from a PDF, writing them one-per-line to a
-text file.
+and given fill colour from a PDF, writing them one-per-line to a text file.
 
 Examples
 --------
@@ -33,7 +31,7 @@ except ImportError:
 # --------------------------------------------------------------------------- #
 
 
-BLACK = 0x000000           # RGB integer used by PyMuPDF for pure black
+COLOR = 0x000000           # RGB integer used by PyMuPDF for pure black
 
 
 def iter_font_words(pdf_path: Path, font_pattern: str):
@@ -52,7 +50,7 @@ def iter_font_words(pdf_path: Path, font_pattern: str):
                     for span in line.get("spans", []):
                         if (
                             regex.fullmatch(span["font"])        # font check
-                            and span["color"] == BLACK           # colour check
+                            and span["color"] == COLOR           # colour check
                         ):
                             # span["text"] may hold several words → split()
                             for word in span["text"].split():
