@@ -1,56 +1,40 @@
 """
-extract_romanian_with_diacritics.py
-───────────────────────────────────
-• Extracts *only* those words that contain at least one of
-  ĂÂÎȘŞȚŢăâîșşțţ from a PDF and writes them one‑per‑line.
-
-Dependencies: pdfminer.six
-    pip install pdfminer.six
+Extract words from a PDF that contain at least one character from a list.
 """
-
 from __future__ import annotations
-import re
+import re, sys
 from pathlib import Path
 from pdfminer.high_level import extract_text
 
-# ╔════════════════════════════════════════════════════════════════╗
-# ║                        USER ‑ CONFIG                          ║
-# ╚════════════════════════════════════════════════════════════════╝
 
-PDF_PATH   = Path("input.pdf")              # ← your PDF
-OUTPUT_PATH = Path("romanian_words.txt")    # ← result file
+# ╔══════════════════════════════════════════════════════════════╗
+# ║                         USER CONFIG                         ║
+# ╚══════════════════════════════════════════════════════════════╝
+PDF_PATH        = Path("input.pdf")      # source PDF
+OUTPUT_PATH     = Path("words_by_char.txt")      # destination text file
+LANGUAGE        = "Romanian"
+TARGET_CHAR     = "ĂÂÎȘŞȚŢăâîșşțţ"        # characters of interest
+KEEP_DUPLICATES = False                  # True = list every hit
+# ╔══════════════════════════════════════════════════════════════╗
+# ║                      END USER CONFIG                        ║
+# ╚══════════════════════════════════════════════════════════════╝
 
-ROM_DIACRITICS = "ĂÂÎȘŞȚŢăâîșşțţ"
 
-# ╔════════════════════════════════════════════════════════════════╗
-# ║                      END  USER ‑ CONFIG                       ║
-# ╚════════════════════════════════════════════════════════════════╝
+WORD_RE = re.compile(rf"[A-Za-z{TARGET_CHAR}]+", re.UNICODE)
 
-ROM_WORD_RE = re.compile(rf"[A-Za-z{ROM_DIACRITICS}]+", re.UNICODE)
-
-def extract_pdf_text(pdf_path: Path) -> str:
-    """Return full text of the PDF using pdfminer.six."""
-    return extract_text(str(pdf_path))
 
 def main() -> None:
     if not PDF_PATH.exists():
-        raise FileNotFoundError(f"Cannot find PDF: {PDF_PATH}")
+        sys.exit(f"❌ PDF not found: {PDF_PATH}")
 
-    print(f"Extracting Romanian words (must contain a diacritic) from {PDF_PATH.name} …")
+    text = extract_text(str(PDF_PATH))
+    words = [w for w in WORD_RE.findall(text) if any(c in TARGET_CHAR for c in w)]
+    if not KEEP_DUPLICATES:
+        words = list(dict.fromkeys(words))
 
-    text = extract_pdf_text(PDF_PATH)
-    candidates = ROM_WORD_RE.findall(text)
+    OUTPUT_PATH.write_text("\n".join(words), encoding="utf-8")
+    print(f"✅ {LANGUAGE}: wrote {len(words):,} words → {OUTPUT_PATH}")
 
-    kept: list[str] = [
-        w for w in candidates
-        if any(ch in ROM_DIACRITICS for ch in w)
-    ]
-
-    # Optional: unique + preserve original order
-    kept = list(dict.fromkeys(kept))
-
-    OUTPUT_PATH.write_text("\n".join(kept), encoding="utf-8")
-    print(f"✓ Wrote {len(kept):,} words → {OUTPUT_PATH.as_posix()}")
 
 if __name__ == "__main__":
     main()
