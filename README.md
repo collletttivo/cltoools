@@ -1,7 +1,8 @@
 A set of tools designed specifically to ease the process of including, testing, and validating extended character sets in order to support various languages and writing systems.
 
 ## word-o-mat v4.0 a
-https://github.com/collletttivo/word-o-mat/
+#### https://github.com/collletttivo/word-o-mat/ <br/>
+
 The plug-in now has two drop-down menus: one to select the writing system (Latin, Arabic, Cyrillic, N’Ko and Tifinagh at the moment) and one to select the language (we added Farsi, Bulgarian, Russian, Bambara, Romanian, Maninka, Tifinagh). 
 
 ## Wordlist builders
