@@ -2,6 +2,7 @@ A set of tools designed specifically to ease the process of including, testing, 
 
 ## word-o-mat v4.0 a
 https://github.com/collletttivo/word-o-mat/
+The plug-in now has two drop-down menus: one to select the writing system (Latin, Arabic, Cyrillic, N’Ko and Tifinagh at the moment) and one to select the language (we added Farsi, Bulgarian, Russian, Bambara, Romanian, Maninka, Tifinagh). 
 
 ## Wordlist builders
 If you want to build a dictionary yourself and have a source PDF file you can use these set of scripts to extract words by Unicode Range, by Specific characters or by font and color.
