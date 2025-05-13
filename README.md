@@ -14,4 +14,4 @@ If you want to build a dictionary yourself and have a source PDF file you can us
 A one-stop-shop file to compare your font's character set to new and old industry standards, including standards from Apple, Micrisoft, Linotype, Monotype, Adobe, ISO and the more recent Koeberlin and SharpType.
 
 ## mark and mark2mark feature helpers
-Not at all a definitive solution but a quick way to write some mark features to test mark attachments for minority writing systems on the fly.
+Not at all a definitive solution but a quick way to write some mark features to test attachments for minority writing systems on the fly.
