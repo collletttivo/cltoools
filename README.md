@@ -1,6 +1,6 @@
+![CLT Toools](/CLT_Toools.png)
 A set of tools designed specifically to ease the process of including, testing, and validating extended character sets in order to support various languages and writing systems.
 
-![CLT Toools](/CLT_Toools.png)
 
 ## word-o-mat v4.0 a
 #### https://github.com/collletttivo/word-o-mat/ <br/>
